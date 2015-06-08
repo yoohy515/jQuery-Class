@@ -5,10 +5,15 @@
 ```sh
 $ git --version # 설치된 Git 버전 체크
 ```
+	* .gitignore 파일의 역할 (버전관리하고싶지 않은 폴더/파일 설정)
 * [GitHub](http://github.com) 설치
 
 * [Node.js](http://nodejs.org/) 설치
 ```sh
 $ node --version # 설치된 Node 버전 체크
 ```
-* [NPM](http://npmjs.org/) 확인/관리
+* [NPM](http://npmjs.org/) 확인/ 모듈 설치/고나리
+```sh
+# NPM을 활용한 모듈 설치
+$ npm install {module_name} # jQuery 설치 npm i jquery
+```
