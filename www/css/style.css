@@ -1,1 +1,3 @@
-@import "part/normalize.css"
+@import "commons/normalize.css";
+@import "commons/hyo.reset.css";
+@import "commons/classes.css";
