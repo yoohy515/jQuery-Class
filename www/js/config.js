@@ -4,33 +4,20 @@
  * --------------------------------
  */
 require.config({
-
 	baseUrl: 'js',
 
-	/**
-	 * 모듈 경로 별칭 설정
-	 * @type {Object}
-	 */
 	paths: {
 		// 라이브러리
-		'jquery'           : 'libs/jquery.min',
-		'modernizr'        : 'libs/modernizr.min',
-		'detectizr'        : 'libs/detectizr.min',
-		// 플러그인
-		'redify'           : 'plugins/jquery.redify',
-		'setHeight100vh'   : 'plugins/jquery.setHeight100vh',
+		'jquery'    : 'libs/jquery.min',
+		'modernizr' : 'libs/modernizr.min',
+		'detectizr' : 'libs/detectizr.min',
 		// 모듈
-		'main'             : 'modules/main',
-		'init'             : 'modules/init',
-		'active_detectizr' : 'modules/active_detectizr',
+		'main'		: 'modules/main',
+		'other_main': 'modules/other_main',
+		'checkLibs'	: 'modules/checkLibs',
 	},
 
-	/**
-	 * AMD를 지원하지 않는 JS 라이브러리 AMD 호환 설정
-	 * @type {Object}
-	 */
 	shim: {
-		'jquery': '$',
 		'modernizr': {
 			exports: 'Modernizr'
 		},
@@ -39,12 +26,15 @@ require.config({
 			deps: ['modernizr']
 		}
 	},
-
+	
 	deps: [
-		'main',
-		'modules/_test',
+		'plugins/jquery.radioClass'
+		// 'main',
+		// 'other_main',
+		// 'checkLibs'
 	],
-	waitSeconds : 15,
-	urlArgs     : 'ts=' + (new Date()).getTime(),
 
+	waitSeconds: 15,
+
+	urlArgs: 'hyo=' + (new Date()).getTime()
 });
