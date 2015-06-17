@@ -28,7 +28,8 @@ require.config({
 	},
 	
 	deps: [
-		'plugins/jquery.radioClass'
+		// 'plugins/jquery.radioClass',
+		'init'
 		// 'main',
 		// 'other_main',
 		// 'checkLibs'
