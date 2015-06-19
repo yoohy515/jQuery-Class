@@ -1,75 +1,46 @@
 ## 웹 접근성을 고려한 jQuery 플러그인 제작 과정
 
 - [1일차 내용 요약](DOC/DAY01.md)
+- [2일차 내용 요약](DOC/DAY02.md)
+- [3일차 내용 요약](DOC/DAY03.md)
+- [4일차 내용 요약](DOC/DAY04.md)
 
 ---
 
-### 2일차 "JS 모듈 관리(Javascript Modules Management)"
+## 함수 사용법
+- 함수 선언식
+- 함수 표현식
+- 즉시 실행함수
 
-이번 시간에는 Javascript 관리와 성능을 향상시키지 위한 모듈 관리방법에 대해 알아보고<br>
-Client/Server Side Javascript 표준화를 위한 [CommonJS](http://en.wikipedia.org/wiki/CommonJS), [AMD](http://en.wikipedia.org/wiki/Asynchronous_module_definition)에 대해 공부합니다.<br>
-익히 잘 알려진 모듈 관리도구로는 `Require.js`와 `Browserify`가 있습니다.
+###### 함수 선언식
+```js
+// function 함수이름() {}
+function show() {}
+```
 
-- [＞ Require.js](DOC/module-loader/requirejs.md)
-- [＞ Browserify](DOC/module-loader/browserify.md)
+###### 함수 표현식
+```js
+// var 함수이름 = function() {};
+var show = function () {};
+```
 
--
+###### 즉시 실행함수
+```js
+// (function() {})()
+(function (global) {
+    console.log(global); // window, this
+    // 지역....
+    // var를 붙여야 지역변수
+    // 전역을 통해 다른 모듈과 공유하려면
+    // 명시적으로 global을 사용한다.
 
-### 모듈 관리도구 - 현재 트랜드 체크!
+})(window !== undfined ? window : this)
+```
 
-[Google 트렌드 자료](http://www.google.com/trends/explore#q=require.js%2C%20Browserify&date=1%2F2011%2054m&cmpt=q&tz=)를 살펴보면 2014년 이후부터 `Require.js` 보다 `Browserify` 검색량이 급증.
+### 함수는 별도의 공간(Scope)을 형성
+- 호이스트(Hoist)
+- 가급적 `var`를 붙여서 지역 변수 생성
+- 필요하다면 명시적으로 `global`을 붙여서 외부 모듈과 공유
 
-![구글 트렌드: 시간 흐름에 따른 관심도 변화](GUIDE/compare-requirejs-vs-browserify.png)
-
--
-
-### 프론드-엔드 개발자로서 요구되는 능력
-
-[![Front-End Developer Infographic](GUIDE/life-of-front-end-developer-infographic-Secondary.jpg)](http://www.skilledup.com/articles/life-front-end-web-developer-infographic)
-
-#### 고려해야 할 목표
-- 접근성
-- 사용성
-- 성능 향상
-
-#### 요구되는 테크닉
-
-- **가이드라인**
-	- 접근성
-	- 검색엔진최적화(SEO)
-	- UX 사용성 모델
-
-- **웹 언어**
-	- HTML
-	- CSS
-	- Javascript
-
-- **라이브러리**
-	- jQuery
-	- Underscore
-	- Modernizr
-
-- **이미지 편집**
-	- Photoshop
-	- Illustrator
-
-- **프리프로세싱 & 컴파일러**
-	- CSS
-		- Sass
-		- LESS
-	- JS
-		- CoffeeScript
-		- TypeScript
-
-- **모듈 관리**
-	- requireJS
-	- Browerify
-
-- **업무 관리도구**
-	- Gulp
-	- Grunt
-
-- **클라이언트 사이드 MVC 프레임워크**
-	- Angular
-	- Backbone
+### 전역(Window)은 오염시키지 않는 것이 중요!!!
 
