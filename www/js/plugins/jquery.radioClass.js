@@ -4,13 +4,14 @@ define(['jquery'], function($) {
 
 	if (!$.fn.radioClass) {
 		$.fn.radioClass = function(name) {
-			// this: 제이쿼리 객체
+			// this: jquery 개체
 			this.addClass(name);
+
 			var $siblings = this.siblings();// 집합
 			$.each($siblings, function(index, item) {// Utility Methods
 				var $item = $siblings.eq(index); // $(item);
 				if ( $item.hasClass(name) ) {
-					$item.removeClass(name);
+					// $item.removeClass(name);
 				}
 				// DomScript
 				// if (item.classList.contains(name)) {
