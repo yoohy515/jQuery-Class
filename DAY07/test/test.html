@@ -4,6 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta charset="UTF-8">
 	<title>jQuery 플러그인 테스트 - jquery.radioClass()</title>
+
 	<!-- QUnit 스타일 -->
 	<link rel="stylesheet" href="../libs/qunit/qunit.css">
 	<!-- QUnit 스크립트 -->
@@ -17,9 +18,27 @@
 
 	<!-- 시작: #qunit -->
 	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
 	<!-- 끝: #qunit -->
 
+	<ul id="demo">
+		<li><a href="">item</a></li>
+		<li class="test"><a href="">test item</a></li>
+		<li><a href="">item</a></li>
+		<li><a href="">item</a></li>
+	</ul>
+
+<script>
+(function($){
+	var $demo = $('#demo');
+	$demo.on('click', 'li > a', function(e) {
+		e.preventDefault();
+		// $(this).parent().radioClass('clicked');
+		$(this).radioClass('clicked', 'li');
+	});
+})(window.jQuery);
+</script>
 <!-- 플러그인 테스트 파일 -->
-<script src="jquery.radioClass.test.js"></script>
+<!-- <script src="jquery.radioClass.test.js"></script> -->
 </body>
 </html>
