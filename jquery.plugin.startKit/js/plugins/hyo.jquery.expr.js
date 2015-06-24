@@ -22,25 +22,32 @@ define(function() {
 	// })(window.getComputedStyle);
 
 
-	if (!$.expr[':'].inline) {
-		$.expr[':'].inline = function(el, index, meta, items) {
-			// $.log(el, index, meta, items);	// item jQuery 1.7
+	// if (!$.expr[':'].inline) {
+	// 	$.expr[':'].inline = function(el, index, meta, items) {
+	// 		// $.log(el, index, meta, items);	// item jQuery 1.7
 
-			// window.getComputedStyle(el).display; // W3C
-			// el.currentStyle.display // MS
-			// return getStyle(el, 'display') === 'inline';
-			return $(el).css('display') === 'inline';
+	// 		// window.getComputedStyle(el).display; // W3C
+	// 		// el.currentStyle.display // MS
+	// 		// return getStyle(el, 'display') === 'inline';
+	// 		return $(el).css('display') === 'inline';
+	// 	}
+	// }
+
+	var display_value = 'inline, block, inline-block, -webkit-box'.split(', ');
+	var k = 0,
+		l = display_value.length,
+		d_value;
+
+	for (; k<l; k++) {
+
+		d_value = display_value[k];
+
+		if (!$.ex[d_value]) {
+			$.ex[d_value] = function(el, index, meta, items) {
+				return $.$(el).css('display') === d_value;
+			}
 		}
+
 	}
-	if (!$.expr[':'].block) {
-		$.expr[':'].block = function(el, index, meta, items) {
-			// $.log(el, index, meta, items);	// item jQuery 1.7
-
-			// window.getComputedStyle(el).display; // W3C
-			// el.currentStyle.display // MS
-			// return getStyle(el, 'display') === 'block';
-			return $(el).css('display') === 'block';
-		}
-	};
 	
 });
