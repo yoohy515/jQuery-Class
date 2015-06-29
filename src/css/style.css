@@ -1,0 +1,43 @@
+@import url(http://fonts.googleapis.com/css?family=Exo+2:100);
+
+html {
+	font-size: 16px;
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	color: #fff;
+	background: #FC414B -webkit-linear-gradient(#fc414b, #931A25);
+	background: #FC414B linear-gradient(#fc414b, #931A25);
+	letter-spacing: -0.04em;
+}
+
+body * {
+	margin: 0;
+	font-family: "Exo 2", sans-serif;
+	font-weight: 100;
+}
+
+a {
+	color: inherit;
+	line-height: 1.5;
+}
+
+h1 {
+	margin-bottom: 24px;
+	margin-bottom: 1.5rem;
+}
+
+p {
+	margin-bottom: 1rem;
+	color: #FACED2;
+}
+
+.container {
+	max-width: 640px;
+	max-width: 40rem; /* Root Element base EM */
+	margin: 0 auto;
+	padding-top: 100px;
+	padding-top: 6.25rem;
+}
