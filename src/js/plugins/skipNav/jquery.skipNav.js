@@ -1,7 +1,16 @@
-define([
-	'jquery.utils',
-], function() {
-	'use strict';
+define(['jquery.utils'], function() {
+	// 모듈코드
+
+	/**
+	 * --------------------------------
+	 * jQuery 플러그인 디자인 패턴
+	 * 이름 정의
+	 * 플러그인 유무 확인
+	 * 플러그인 작성
+	 * 플러그인 내부 this 참조 확인
+	 * 플러그인 체이닝 설정
+	 * --------------------------------
+	 */
 
 	/**
 	 * 스킵 내비게이션을 적용
@@ -20,11 +29,11 @@ define([
 	var plugin = 'skipNav';
 
 	// 플러그인 존재 유무 확인
-	if( !$.fn[plugin] ) {
+	if ( !$.fn[plugin] ) {
 
 		// 플러그인 정의
 		$.fn[plugin] = function(options, callback) {
-
+			
 			// 플러그인 기본 + 사용자정의 옵션 병합
 			var settings = $.extend({}, $.fn[plugin].defaults, options);
 
@@ -38,7 +47,6 @@ define([
 				// 이벤트 위임
 				// $this 내부 a 요소에게만 callback 함수 적용
 				.on('click', 'a', function(e) {
-
 					// 브라우저 기본 동작 차단
 					e.preventDefault();
 
@@ -52,7 +60,6 @@ define([
 					var $target = $.$(path);
 
 					$target
-
 						// 목적지 요소에 접근성을 부여하기 위해
 						// 비 포커스 요소에 tabindex=0 속성을 정의합니다.
 						.attr('tabindex', 0)
@@ -69,14 +76,12 @@ define([
 					window.location.hash = path;
 
 					// callback 함수 전달 시, 플러그인 완료 후 callback 함수 실행
-					if ( callback && $.isFunction(callback) ) {
+					if ( callback && $.isFuncion(callback) ) {
 						// callback() 함수 내부 this가 $target을 참조하도록 설정
 						// callback() 함수 내부에 전달되는 첫번째 인자 값을 settings로 설정
 						callback.call($target, settings);
-					}
-
+					};
 				});
-
 
 			// 플러그인 적용 대상이 하나일 때, 체이닝 설정
 			return $this;
@@ -85,8 +90,8 @@ define([
 
 		// 플러그인 기본 옵션 설정
 		$.fn[plugin].defaults = {
-			'container': 'skipNav-container'
-		};
-	}
+			'container' : 'skipNav-container'
+		}
+	};
 
 });
