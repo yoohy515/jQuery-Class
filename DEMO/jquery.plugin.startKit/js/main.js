@@ -1,30 +1,31 @@
 require.config({
-	
-	baseUrl: 'js/',
+
+	baseUrl: 'js',
 
 	paths: {
-		'qunit': 'libs/qunit/qunit',
-		'jquery': 'libs/jquery.min'
+		'jquery'             : 'libs/jquery.min',
+		'yamoo9.jquery.util' : 'plugins/yamoo9.jquery.util',
+		'yamoo9.jquery.expr' : 'plugins/yamoo9.jquery.expr',
 	},
 
 	shim: {
-		'qunit': {
-			exports: 'QUnit'
-		},
 		'jquery': {
 			exports: '$'
-		}
+		},
+		'yamoo9.jquery.util': {
+			deps: ['jquery']
+		},
+		'yamoo9.jquery.expr': {
+			deps: ['jquery', 'yamoo9.jquery.util']
+		},
 	},
 
 	waitSeconds: 15,
 
-	urlArgs: 'ts:' + (new Date()).getSeconds()
+	urlArgs: 'ts:' + (new Date()).getTime()
 
 });
 
-require(['qunit', 'jquery'], function(QUnit, $) {
-	'use strict';
-
-	console.log(!!QUnit.module, $().jquery);
-	
+require(['yamoo9.jquery.expr'], function() {
+	$.log($.version);
 });

@@ -3,35 +3,41 @@ require.config({
 	baseUrl: '../js',
 
 	paths: {
-		'qunit': 'libs/qunit/qunit',
-		'jquery': 'libs/jquery.min',
-		'hyo.jquery.util': 'plugins/hyo.jquery.util',
-		'hyo.jquery.expr': 'plugins/hyo.jquery.expr',
-		'hyo.jquery.util.test': '../test/hyo.jquery.util.test',
-		'hyo.jquery.expr.test': '../test/hyo.jquery.expr.test'
+		'qunit'                   : 'libs/qunit/qunit',
+		'jquery'                  : 'libs/jquery.min',
+		'yamoo9.jquery.util'      : 'plugins/yamoo9.jquery.util',
+		'yamoo9.jquery.expr'      : 'plugins/yamoo9.jquery.expr',
+		'yamoo9.jquery.util.test' : '../test/yamoo9.jquery.util.test',
+		'yamoo9.jquery.expr.test' : '../test/yamoo9.jquery.expr.test',
 	},
 
 	shim: {
 		'qunit': {
-			exports: 'QUnit'
+			exports: 'QUnit',
+			init: function(QUnit) {
+				Qunit.config.autoLoad = false;
+				Qunit.config.autoStart = false;
+			}
 		},
+
 		'jquery': {
 			exports: '$'
 		},
 
-		'hyo.jquery.util': ['jquery'],
-		'hyo.jquery.expr': ['jquery'],
+		'yamoo9.jquery.util': ['jquery'],
+		'yamoo9.jquery.expr': ['jquery'],
 
-		'hyo.jquery.util.test': {
+		'yamoo9.jquery.util.test': {
 			deps: [
-				'qunit', 
-				'hyo.jquery.util']
+				'qunit',
+				'yamoo9.jquery.util'
+			]
 		},
 
-		'hyo.jquery.expr.test':	[
-			'qunit', 
-			'hyo.jquery.util',
-			'hyo.jquery.expr'
+		'yamoo9.jquery.expr.test': [
+			'qunit',
+			'yamoo9.jquery.util',
+			'yamoo9.jquery.expr'
 		]
 	},
 
@@ -41,6 +47,7 @@ require.config({
 
 });
 
-require(['hyo.jquery.expr.test'], function() {
+require(['yamoo9.jquery.expr.test'], function() {
+	QUnit.load();
 	QUnit.start();
 });
