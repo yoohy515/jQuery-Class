@@ -26,14 +26,15 @@ define([
 		$.fn[plugin] = function(options, callback) {
 
 			// 플러그인 기본 + 사용자정의 옵션 병합
-			var settings = $.extend({}, $.fn[plugin].defaults, options);
+			var settings = $.extend(true,{}, $.fn[plugin].defaults, options);
 
 			// 플러그인이 적용된 $() 인스턴스 집합
 			var $this = this;
 
+
 			$this
 				// 식별자 class 속성 추가
-				.addClass( settings.container )
+				.addClass( settings.containerClass )
 
 				// 이벤트 위임
 				// $this 내부 a 요소에게만 callback 함수 적용
@@ -51,41 +52,67 @@ define([
 					// utils/jquery.utils.js 확인
 					var $target = $.$(path);
 
-					$target
+					// $target은 컨테이너 요소입니다.
+					// 만약 settings.setContainerFocuing 조건이 참이면...
+					if ( settings.setContainerFocuing ) {
 
-						// 목적지 요소에 접근성을 부여하기 위해
-						// 비 포커스 요소에 tabindex=0 속성을 정의합니다.
-						.attr('tabindex', 0)
+						$target
 
-						// 포커스를 적용합니다.
-						.focus()
+							// 목적지 요소에 접근성을 부여하기 위해
+							// 비 포커스 요소에 tabindex=0 속성을 정의합니다.
+							.attr('tabindex', 0)
 
-						// 블러 이벤트가 발생하면 tabindex 속성을 -1로 변경합니다.
-						.on('blur', function() {
-							$target.attr('tabindex', -1);
-						});
+							// 포커스를 적용합니다.
+							.focus()
+
+							// 블러 이벤트가 발생하면 tabindex 속성을 -1로 변경합니다.
+							.on('blur', function() {
+								$target.attr('tabindex', -1);
+							});
+
+					}
+					// 하지만 거짓이라면...
+					else {
+						$target.find('*:focusable').eq(0).focus();
+					}
+
 
 					// 뒤로가기 버튼을 적용했을 때, 메모리(URL 뒤에 붙는 hash) 설정
-					window.location.hash = path;
+					// settings.setHash 값이 참일 때만 아래 코드를 수행하라.
+					// if ( settings.setHash === true) {
+					// 	window.location.hash = path;
+					// };
 
-					// callback 함수 전달 시, 플러그인 완료 후 callback 함수 실행
-					if ( callback && $.isFunction(callback) ) {
-						// callback() 함수 내부 this가 $target을 참조하도록 설정
-						// callback() 함수 내부에 전달되는 첫번째 인자 값을 settings로 설정
-						callback.call($target, settings);
-					}
+					settings.setHash && (window.location.hash = path);
 
 				});
 
+			// 플러그인이 적용된 내부의 a 요소는 화면에 감춰진 상태의 class 속성이 부여된다.
+			// 사용자가 감춰진 a 요소에 포커스를 활성화 시키면 화면에 보여진다.
+			$this.find('a').addClass(settings.linkClasses.hidden + ' ' + settings.linkClasses.focusable);
+
+
+			// callback 함수 전달 시, 플러그인 완료 후 callback 함수 실행
+			if ( callback && $.isFunction(callback) ) {
+				// callback() 함수 내부 this가 $target을 참조하도록 설정
+				// callback() 함수 내부에 전달되는 첫번째 인자 값을 settings로 설정
+				callback.call($this, settings);
+			}
 
 			// 플러그인 적용 대상이 하나일 때, 체이닝 설정
 			return $this;
 
-		}
+		};
 
 		// 플러그인 기본 옵션 설정
 		$.fn[plugin].defaults = {
-			'container': 'skipNav-container'
+			'containerClass': 'skipNav-container',
+			'linkClasses': {
+				'hidden': 'a11y-hidden',
+				'focusable': 'focusable'
+			},
+			'setHash': true,
+			'setContainerFocuing': true,
 		};
 	}
 
