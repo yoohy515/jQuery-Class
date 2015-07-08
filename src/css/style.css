@@ -19,8 +19,8 @@
 }
 
 body {
-	/*color: #fff;*/
-	/*background: #fc414b linear-gradient(#fc414b, #931A25);*/
+	color: #fff;
+	background: #fc414b linear-gradient(#fc414b, #931A25);
 	letter-spacing: -0.04em;
 	font-family: "Exo 2", sans-serif;
 	font-weight: 100;

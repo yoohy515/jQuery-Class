@@ -54,7 +54,7 @@ define([
 
 					// $target은 컨테이너 요소입니다.
 					// 만약 settings.setContainerFocuing 조건이 참이면...
-					if ( settings.setContainerFocuing ) {
+					if( settings.setContainerFocuing ) {
 
 						$target
 
@@ -73,18 +73,20 @@ define([
 					}
 					// 하지만 거짓이라면...
 					else {
+
 						$target.find('*:focusable').eq(0).focus();
+
 					}
+
+
 
 
 					// 뒤로가기 버튼을 적용했을 때, 메모리(URL 뒤에 붙는 hash) 설정
 					// settings.setHash 값이 참일 때만 아래 코드를 수행하라.
-					// if ( settings.setHash === true) {
+					// if ( settings.setHash ) {
 					// 	window.location.hash = path;
-					// };
-
+					// }
 					settings.setHash && (window.location.hash = path);
-
 				});
 
 			// 플러그인이 적용된 내부의 a 요소는 화면에 감춰진 상태의 class 속성이 부여된다.
@@ -112,7 +114,7 @@ define([
 				'focusable': 'focusable'
 			},
 			'setHash': true,
-			'setContainerFocuing': true,
+			'setContainerFocuing': true
 		};
 	}
 
